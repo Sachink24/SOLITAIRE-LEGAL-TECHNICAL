@@ -1107,6 +1107,9 @@
                         <a href="legal.html" class="nav-menu-item">
                             <span class="glyph">&#128196;</span> Legal (Privacy &amp; Terms)
                         </a>
+                        <a href="admin.html" class="nav-menu-item">
+                            <span class="glyph">&#128274;</span> Admin
+                        </a>
                     </div>
                 </div>
             </div>
@@ -1284,16 +1287,26 @@
             if (view === 'legalEval') {
                 legalView.style.display = 'block';
                 menuLegalEvalBtn.classList.add('item-active');
+                history.replaceState(null, '', '#legal');
             } else if (view === 'techEval') {
                 techView.style.display = 'block';
                 menuTechEvalBtn.classList.add('item-active');
+                history.replaceState(null, '', '#technical');
             } else {
                 home.style.display = 'block';
                 menuHomeBtn.classList.add('item-active');
+                history.replaceState(null, '', '#home');
             }
             window.scrollTo(0, 0);
             closeNavMenu();
         }
+
+        // Deep-link support: index.html#legal / #technical opens that view directly
+        (function () {
+            var hash = (window.location.hash || '').replace('#', '');
+            if (hash === 'legal') { showView('legalEval'); }
+            else if (hash === 'technical') { showView('techEval'); }
+        })();
     </script>
 
     <script>
